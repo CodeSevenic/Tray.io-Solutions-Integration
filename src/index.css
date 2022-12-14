@@ -19,10 +19,20 @@ div#root {
   grid-template-columns: 1fr 1fr;
 }
 
-.login-form > div > div {
+.login-form .form-wrapper {
   position: relative !important;
   top: 50% !important;
   transform: translateY(-50%);
+  height: fit-content;
+  padding: 0 20px;
+}
+
+.login-form .form-wrapper .logo-wrapper {
+  margin-bottom: 50px;
+}
+
+.login-form .form-wrapper .form-div > div {
+  position: relative !important;
 }
 
 .left-content {
@@ -39,8 +49,22 @@ div#root {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50px;
+  width: 70px;
   right: 0;
   background-color: #fff;
   z-index: 10;
+}
+
+.logo-wrapper > svg {
+  margin: 0 auto;
+  display: block;
+}
+
+.logo-vertical {
+  width: 30px;
+  margin: 40px auto;
+}
+
+.logo-vertical > img {
+  width: 100%;
 }

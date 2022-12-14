@@ -3,6 +3,7 @@ import LoginForm from './LoginForm';
 import { Redirect } from 'react-router-dom';
 import Loading from '../Loading';
 import { auth } from './Auth';
+import { MOLogo } from '../svgs';
 
 export default class Login extends React.Component {
   state = {
@@ -66,12 +67,19 @@ export default class Login extends React.Component {
     return (
       <div className="login-form">
         <div className="form-wrapper">
+          <div className="logo-wrapper">
+            <MOLogo />
+          </div>
           <Loading loading={this.state.loading}>
             <LoginForm onLogin={this.login} />
           </Loading>
         </div>
         <div className="left-content">
-          <div className="text-stripe"></div>
+          <div className="text-stripe">
+            <div className="logo-vertical">
+              <img src="/MO-secondary-logo-colour.webp" alt="Logo Vertical" />
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
     };
 
     return (
-      <div>
+      <div className="form-div">
         <div style={styles.loginContainer}>
           <Paper style={styles.paper}>
             <Typography style={styles.loginHeader} variant="headline">
