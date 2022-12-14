@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  position: relative;
+  height: 100vh;
+}
+
+/* ======== Modifying Styles ========= */
+
+div#root {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.login-form > div > div {
+  position: relative !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.left-content {
+  /* background-color: red; */
+  background-image: url(/pexels-marta-branco.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+}
+
+.text-stripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  right: 0;
+  background-color: #fff;
+  z-index: 10;
+}
