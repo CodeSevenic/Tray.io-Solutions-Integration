@@ -65,9 +65,11 @@ export default class Login extends React.Component {
 
     return (
       <div className="login-form">
-        <Loading loading={this.state.loading}>
-          <LoginForm onLogin={this.login} />
-        </Loading>
+        <div className="form-wrapper">
+          <Loading loading={this.state.loading}>
+            <LoginForm onLogin={this.login} />
+          </Loading>
+        </div>
         <div className="left-content">
           <div className="text-stripe"></div>
         </div>
