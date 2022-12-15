@@ -6,14 +6,12 @@ const mockUserDB = [];
  * @param {User} input - {username: 'myname', password: 'mypass'}
  * @returns {User | undefined}
  */
-export const retrieveUserFromMockDB = input => {
-    const matches = mockUserDB.filter(
-        user =>
-            user.username === input.username &&
-            user.password === input.password
-    );
+exports.retrieveUserFromMockDB = (input) => {
+  const matches = mockUserDB.filter(
+    (user) => user.username === input.username && user.password === input.password
+  );
 
-    return matches[0];
+  return matches[0];
 };
 
 /**
@@ -21,9 +19,9 @@ export const retrieveUserFromMockDB = input => {
  * @param {User} input
  * @returns {Boolean}
  */
-export const userExistsInMockDB = input => {
-    const matches = mockUserDB.filter(user => user.username === input.username);
-    return matches.length > 0;
+exports.userExistsInMockDB = (input) => {
+  const matches = mockUserDB.filter((user) => user.username === input.username);
+  return matches.length > 0;
 };
 
 /**
@@ -32,12 +30,12 @@ export const userExistsInMockDB = input => {
  *
  * @returns {Void}
  */
-export const insertUserToMockDB = input => {
-    mockUserDB.push({
-        name: input.body.name,
-        uuid: input.uuid,
-        trayId: input.trayId,
-        username: input.body.username,
-        password: input.body.password,
-    });
+exports.insertUserToMockDB = (input) => {
+  mockUserDB.push({
+    name: input.body.name,
+    uuid: input.uuid,
+    trayId: input.trayId,
+    username: input.body.username,
+    password: input.body.password,
+  });
 };

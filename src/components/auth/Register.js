@@ -1,67 +1,94 @@
 import React from 'react';
-import RegisterForm from './RegisterForm'
+import { MOLogo } from '../svgs';
+import RegisterForm from './RegisterForm';
 
 export default class Register extends React.Component {
-    state = {
-        redirectToReferrer: false,
-        error: false,
-        success: false,
-        loading: false,
-    }
+  state = {
+    redirectToReferrer: false,
+    error: false,
+    success: false,
+    loading: false,
+  };
 
-    showError = () => this.setState({
-        error: true,
-        loading: false
+  showError = () =>
+    this.setState({
+      error: true,
+      loading: false,
     });
 
-    register = (data) => {
-        this.setState({
-            loading: true
-        });
-        fetch('/api/register', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        })
-            .then((response) => {
-                if (response.ok) {
+  register = (data) => {
+    this.setState({
+      loading: true,
+    });
+    fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((response) => {
+        if (response.ok) {
+          this.setState({
+            success: true,
+            loading: false,
+          });
 
-                    this.setState({
-                        success: true,
-                        loading: false,
-                    });
+          setTimeout(() => (window.location = '/login'), 1000);
+        } else {
+          this.showError();
+        }
+      })
+      .catch((err) => {
+        this.showError();
+      });
+  };
 
-                    setTimeout(() => window.location = '/login', 1000);
-                } else {
-                    this.showError();
-                }
-            })
-            .catch((err) => {
-                this.showError();
-            });
-    }
+  explain =
+    'This will create a new in-memory user account in the local Express backend that will persist until the backend is restarted.';
 
-    explain = 'This will create a new in-memory user account in the local Express backend that will persist until the backend is restarted.';
-
-    render() {
-        return (
-            <div>
-                <h1 style={{textAlign: 'center'}}>Register a New User</h1>
-                <div style={{
-                    textAlign: 'center',
-                    width: '500px',
-                    margin: 'auto',
-                    paddingBottom: '10px'
-                }}>{this.explain}</div>
-
-                {this.state.error ? <h3 style={{color: "red", textAlign: "center"}}>Registration failed</h3> : ""}
-                {this.state.success ? <h3 style={{color: "green", textAlign: "center"}}>Registration success</h3> : ""}
-                <RegisterForm onRegister={this.register} loading={this.state.loading}/>
+  render() {
+    return (
+      <div className="register-component">
+        <div className="form-wrapper">
+          <div className="logo-wrapper">
+            <MOLogo />
+          </div>
+          <div className="form-content">
+            <h1 style={{ textAlign: 'center' }}>Register a New User</h1>
+            <div
+              style={{
+                textAlign: 'center',
+                width: '500px',
+                margin: 'auto',
+                paddingBottom: '10px',
+              }}
+            >
+              {this.explain}
             </div>
-        )
-    }
-}
 
+            {this.state.error ? (
+              <h3 style={{ color: 'red', textAlign: 'center' }}>Registration failed</h3>
+            ) : (
+              ''
+            )}
+            {this.state.success ? (
+              <h3 style={{ color: 'green', textAlign: 'center' }}>Registration success</h3>
+            ) : (
+              ''
+            )}
+            <RegisterForm onRegister={this.register} loading={this.state.loading} />
+          </div>
+        </div>
+        <div className="left-content">
+          <div className="text-stripe">
+            <div className="logo-vertical">
+              <img src="/MO-secondary-logo-colour.webp" alt="Logo Vertical" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

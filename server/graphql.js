@@ -1,85 +1,85 @@
 // Module with all graphql queries and mutations:
 
-import gql from 'graphql-tag';
+const gql = require('graphql-tag');
 
-import { generateClient, masterClient } from './gqlclient';
+const { generateClient, masterClient } = require('./gqlclient');
 
-export const queries = {
-    me: token => {
-        const query = gql`
-            {
-                viewer {
-                    details {
-                        username
-                        email
-                    }
-                }
+exports.queries = {
+  me: (token) => {
+    const query = gql`
+      {
+        viewer {
+          details {
+            username
+            email
+          }
+        }
+      }
+    `;
+
+    return generateClient(token).query({ query });
+  },
+
+  auths: (token) => {
+    const query = gql`
+      {
+        viewer {
+          authentications {
+            edges {
+              node {
+                id
+                name
+              }
             }
-        `;
+          }
+        }
+      }
+    `;
 
-        return generateClient(token).query({query});
-    },
+    return generateClient(token).query({ query });
+  },
 
-    auths: token => {
-        const query = gql`
-            {
-                viewer {
-                    authentications {
-                        edges {
-                            node {
-                                id
-                                name
-                            }
-                        }
-                    }
-                }
+  solutions: () => {
+    const query = gql`
+      {
+        viewer {
+          solutions {
+            edges {
+              node {
+                id
+                title
+              }
             }
-        `;
+          }
+        }
+      }
+    `;
 
-        return generateClient(token).query({query});
-    },
+    return masterClient.query({ query });
+  },
 
-    solutions: () => {
-        const query = gql`
-            {
-                viewer {
-                    solutions {
-                        edges {
-                            node {
-                                id
-                                title
-                            }
-                        }
-                    }
-                }
+  solutionInstances: (token) => {
+    const query = gql`
+      {
+        viewer {
+          solutionInstances {
+            edges {
+              node {
+                id
+                name
+                enabled
+              }
             }
-        `;
+          }
+        }
+      }
+    `;
 
-        return masterClient.query({query});
-    },
+    return generateClient(token).query({ query });
+  },
 
-    solutionInstances: token => {
-        const query = gql`
-            {
-                viewer {
-                    solutionInstances {
-                        edges {
-                            node {
-                                id
-                                name
-                                enabled
-                            }
-                        }
-                    }
-                }
-            }
-        `;
-
-        return generateClient(token).query({query});
-    },
-
-    solutionInstance: (id, token) => {
-        const query = gql`
+  solutionInstance: (id, token) => {
+    const query = gql`
             {
                 viewer {
                     solutionInstances(criteria: {ids: "${id}"}) {
@@ -95,12 +95,11 @@ export const queries = {
             }
         `;
 
+    return generateClient(token).query({ query });
+  },
 
-        return generateClient(token).query({query});
-    },
-
-    trayUsername: uuid => {
-        const query = gql`
+  trayUsername: (uuid) => {
+    const query = gql`
             {
                 users(criteria: {externalUserId: "${uuid}"}) {
                     edges {
@@ -112,13 +111,13 @@ export const queries = {
             }
         `;
 
-        return masterClient.query({query});
-    }
+    return masterClient.query({ query });
+  },
 };
 
-export const mutations = {
-    authorize: trayId => {
-        const mutation = gql`
+exports.mutations = {
+  authorize: (trayId) => {
+    const mutation = gql`
             mutation {
                 authorize(input: {userId: "${trayId}"}) {
                     accessToken
@@ -126,11 +125,11 @@ export const mutations = {
             }
         `;
 
-        return masterClient.mutate({mutation});
-    },
+    return masterClient.mutate({ mutation });
+  },
 
-    createSolutionInstance: (userToken, solutionId, name) => {
-        const mutation = gql`
+  createSolutionInstance: (userToken, solutionId, name) => {
+    const mutation = gql`
             mutation {
                 createSolutionInstance(input: {solutionId: "${solutionId}", instanceName: "${name}", authValues: [], configValues: []}) {
                     solutionInstance {
@@ -140,11 +139,11 @@ export const mutations = {
             }
         `;
 
-        return generateClient(userToken).mutate({mutation});
-    },
+    return generateClient(userToken).mutate({ mutation });
+  },
 
-    updateSolutionInstance: (userToken, solutionInstanceId, enabled ) => {
-        const mutation = gql`
+  updateSolutionInstance: (userToken, solutionInstanceId, enabled) => {
+    const mutation = gql`
             mutation {
                 updateSolutionInstance(input: {solutionInstanceId: "${solutionInstanceId}", enabled: ${enabled}}) {
                     clientMutationId
@@ -152,11 +151,11 @@ export const mutations = {
             }
         `;
 
-        return generateClient(userToken).mutate({mutation});
-    },
+    return generateClient(userToken).mutate({ mutation });
+  },
 
-    createExternalUser: (uuid, name) => {
-        const mutation = gql`
+  createExternalUser: (uuid, name) => {
+    const mutation = gql`
             mutation {
                 createExternalUser(input : {externalUserId: "${uuid}", name: "${name}"}) {
                     userId
@@ -164,11 +163,11 @@ export const mutations = {
             }
         `;
 
-        return masterClient.mutate({mutation})
-    },
+    return masterClient.mutate({ mutation });
+  },
 
-    getGrantTokenForUser: (trayId, workflowId) => {
-        const mutation = gql`
+  getGrantTokenForUser: (trayId, workflowId) => {
+    const mutation = gql`
             mutation {
                 generateAuthorizationCode(input: {userId: "${trayId}"}) {
                     authorizationCode
@@ -176,17 +175,16 @@ export const mutations = {
             }
         `;
 
-        return masterClient.mutate({mutation})
-            .then(payload => {
-                return {
-                    payload,
-                    workflowId,
-                };
-            });
-    },
+    return masterClient.mutate({ mutation }).then((payload) => {
+      return {
+        payload,
+        workflowId,
+      };
+    });
+  },
 
-    deleteSolutionInstance: (userToken, solutionInstanceId) => {
-        const mutation = gql`
+  deleteSolutionInstance: (userToken, solutionInstanceId) => {
+    const mutation = gql`
             mutation {
                 removeSolutionInstance(input: {solutionInstanceId: "${solutionInstanceId}"}) {
                     clientMutationId
@@ -194,6 +192,6 @@ export const mutations = {
             }
         `;
 
-        return generateClient(userToken).mutate({mutation});
-    },
+    return generateClient(userToken).mutate({ mutation });
+  },
 };

@@ -12,14 +12,18 @@ div#root {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  height: 100%;
 }
 
+.register-component,
 .login-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 100vh;
 }
 
-.login-form .form-wrapper {
+.login-form .form-wrapper,
+.register-component .form-wrapper {
   position: relative !important;
   top: 50% !important;
   transform: translateY(-50%);
@@ -31,7 +35,8 @@ div#root {
   margin-bottom: 50px;
 }
 
-.login-form .form-wrapper .form-div > div {
+.login-form .form-wrapper .form-div > div,
+.register-form .register-form-wrapper {
   position: relative !important;
 }
 
@@ -67,4 +72,33 @@ div#root {
 
 .logo-vertical > img {
   width: 100%;
+}
+
+.MuiButton-textSecondary-70,
+.MuiButtonBase-root-67 {
+  color: #fff !important;
+  background: #161b30 !important;
+  margin-top: 20px !important;
+  border: 2px solid #161b30 !important;
+}
+.MuiButton-textSecondary-70:hover,
+.MuiButtonBase-root-67:hover {
+  color: #161b30 !important;
+  background: #fff !important;
+  margin-top: 20px !important;
+  border: 2px solid #161b30;
+}
+
+/* ========== Responsive =========== */
+@media screen and (max-width: 768px) {
+  .left-content {
+    display: none;
+  }
+
+  .register-component,
+  .login-form {
+    display: grid;
+    grid-template-columns: unset;
+    height: 100vh;
+  }
 }
