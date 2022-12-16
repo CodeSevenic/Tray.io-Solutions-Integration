@@ -20,7 +20,7 @@ div#root {
 }
 
 .header-bar {
-  /* background-color: #161b30 !important; */
+  background-color: #161b30 !important;
   padding: 10px 30px !important;
   display: flex;
   align-items: center;
