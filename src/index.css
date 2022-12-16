@@ -15,6 +15,18 @@ div#root {
   height: 100%;
 }
 
+.view-container {
+  height: 100vh;
+}
+
+.header-bar {
+  background-color: #161b30 !important;
+  padding: 10px 30px !important;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .register-component,
 .login-form {
   display: grid;
@@ -100,5 +112,19 @@ div#root {
     display: grid;
     grid-template-columns: unset;
     height: 100vh;
+  }
+}
+@media screen and (max-width: 767px) {
+  .form-wrapper * {
+    min-width: 0 !important;
+  }
+
+  .register-component .form-wrapper * {
+    min-width: 0 !important;
+    width: unset !important;
+  }
+
+  .register-component .form-wrapper form * {
+    width: 100% !important;
   }
 }

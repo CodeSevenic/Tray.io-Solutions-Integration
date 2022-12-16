@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav';
 import { withTheme } from '@material-ui/core/styles';
+import { MOLogoWhite } from './svgs';
 
 class View extends React.Component {
   render() {
@@ -23,7 +24,12 @@ class View extends React.Component {
 
     return (
       <div className="view-container">
-        <div style={styles.header}>OEM Demo Application</div>
+        <div className="header-bar" style={styles.header}>
+          <div className="header-logo">
+            <MOLogoWhite />
+          </div>
+          <h1>MO Solutions</h1>
+        </div>
         <div style={styles.container}>
           <Nav />
           <div style={styles.content}>{this.props.children}</div>
