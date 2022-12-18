@@ -64,9 +64,9 @@ exports.addUserToBD = async (user) => {
 
 exports.getUserFromDB = async () => {
   const querySnapshot = await getDocs(collection(db, 'users'));
-
+  let users = [];
   querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
+    console.log(`${doc.id} => ${doc.get('user.body.name')}`);
   });
 };
 

@@ -69,7 +69,6 @@ exports.generateNewUser = (req) => {
     });
 
     addUserToBD({ uuid: uuid, body: req.body, trayId: createRes.data.createExternalUser.userId });
-    getUserFromDB();
 
     return retrieveUserFromMockDB(req.body);
   });
