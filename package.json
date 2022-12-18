@@ -34,7 +34,7 @@
     "start": "concurrently \"yarn server\" \"yarn start-client\"",
     "start-client": " set HTTPS=true && react-scripts start",
     "api": "BABEL_DISABLE_CACHE=1 nodemon --exec babel-node -r dotenv/config server/server.js --presets @babel/preset-env",
-    "server": "node server/server.js",
+    "server": "nodemon server/server.js",
     "build": "cross-env react-scripts build && mv build server/frontend",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

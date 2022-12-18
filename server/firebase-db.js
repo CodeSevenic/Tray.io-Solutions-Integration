@@ -8,6 +8,7 @@ const {
   setDoc,
   where,
   query,
+  addDoc,
 } = require('firebase/firestore/lite');
 
 // =========== CODE TO STORE THE USER ACCESS IN FIREBASE ========== //
@@ -24,43 +25,63 @@ const firebaseConfig = {
 const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
 
-// Store refreshToken
-exports.insertUserToDB = async (token) => {
+// // Store refreshToken
+// exports.insertUserToDB = async (token) => {
+//   try {
+//     // Check if user already exists in DB
+//     let isExist = false;
+//     const q = query(collection(db, 'users'), where('token', '==', token));
+//     const querySnapshot = await getDocs(q);
+//     querySnapshot.forEach((doc) => {
+//       if (doc.exists(token)) {
+//         const obj = doc.data();
+//         isExist = true;
+//       }
+//     });
+
+//     if (isExist) {
+//       return;
+//     }
+
+//     await setDoc(doc(db, 'users', 'tokens'), {
+//       token,
+//     });
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
+exports.addUserToBD = async (user) => {
   try {
-    let isExist = false;
-    const q = query(collection(db, 'users'), where('token', '==', token));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      if (doc.exists(token)) {
-        const obj = doc.data();
-        isExist = true;
-      }
+    const docRef = await addDoc(collection(db, 'users'), {
+      user,
     });
-
-    if (isExist) {
-      return;
-    }
-
-    await setDoc(doc(db, 'users', 'tokens'), {
-      token,
-    });
+    console.log('Document written with ID: ', docRef.id);
   } catch (e) {
-    console.log(e);
+    console.error('Error adding document: ', e);
   }
+};
+
+exports.getUserFromDB = async () => {
+  const querySnapshot = await getDocs(collection(db, 'users'));
+
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+  });
 };
 
 // Fetch Refresh Token if exist in FireStore
-exports.getTokenIfExist = async () => {
-  let refreshToken;
-  const docRef = doc(db, 'users', 'tokens');
-  const docSnap = await getDoc(docRef);
+// exports.getTokenIfExist = async () => {
+//   let refreshToken;
+//   const docRef = doc(db, 'users', 'tokens');
+//   const docSnap = await getDoc(docRef);
 
-  if (docSnap.exists()) {
-    const obj = docSnap.data();
-    refreshToken = obj.token;
-  } else {
-    console.log('No such document!');
-  }
+//   if (docSnap.exists()) {
+//     const obj = docSnap.data();
+//     refreshToken = obj.token;
+//   } else {
+//     console.log('No such document!');
+//   }
 
-  return refreshToken;
-};
+//   return refreshToken;
+// };

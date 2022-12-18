@@ -3,6 +3,7 @@
 const { get } = require('lodash');
 const { mutations } = require('../graphql');
 const { retrieveUserFromMockDB } = require('../db');
+const { getUserFromDB } = require('../firebase-db');
 
 /**
  * Attempt to retrieve a user from the DB:
@@ -16,6 +17,8 @@ exports.attemptLogin = (req) => {
     req.session.user = user;
     req.session.admin = true;
   }
+
+  getUserFromDB();
 
   return user;
 };

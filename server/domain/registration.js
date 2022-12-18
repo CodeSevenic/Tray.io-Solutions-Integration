@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 const { isNil } = require('lodash');
 const { mutations } = require('../graphql');
 const { insertUserToMockDB, retrieveUserFromMockDB, userExistsInMockDB } = require('../db');
+const { addUserToBD, getUserFromDB } = require('../firebase-db');
 
 /**
  * Validate user object:
@@ -66,6 +67,9 @@ exports.generateNewUser = (req) => {
       body: req.body,
       trayId: createRes.data.createExternalUser.userId,
     });
+
+    addUserToBD({ uuid: uuid, body: req.body, trayId: createRes.data.createExternalUser.userId });
+    getUserFromDB();
 
     return retrieveUserFromMockDB(req.body);
   });
