@@ -67,6 +67,13 @@ exports.getUserFromDB = async () => {
   let users = [];
   querySnapshot.forEach((doc) => {
     console.log(`${doc.id} => ${doc.get('user.body.name')}`);
+    const user = {
+      name: doc.get('user.body.name'),
+      uuid: input.uuid,
+      trayId: input.trayId,
+      username: doc.get('user.body.username'),
+      password: doc.get('user.body.password'),
+    };
   });
 };
 
