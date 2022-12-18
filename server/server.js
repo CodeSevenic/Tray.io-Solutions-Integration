@@ -21,15 +21,15 @@ app.use(cors());
 // });
 
 // Front End
-// app.use(express.static(path.join(__dirname, './frontend/build')));
+app.use(express.static(path.join(__dirname, './frontend/build')));
 
-// app.get('*', function (_, res) {
-//   res.sendFile(path.join(__dirname, './frontend/build/index.html'), function (err) {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// });
+app.get('*', function (_, res) {
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // Configure Express application:
 app.use(require('morgan')('tiny'));
