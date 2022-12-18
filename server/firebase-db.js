@@ -80,6 +80,7 @@ exports.getUserFromDB = async () => {
   });
 
   console.log(users);
+  return users;
 };
 
 // Fetch Refresh Token if exist in FireStore

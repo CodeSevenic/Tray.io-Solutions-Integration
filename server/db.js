@@ -1,13 +1,18 @@
+const { getUserFromDB } = require('./firebase-db');
+
 // In-memory users instead of a DB:
-const mockUserDB = [];
+// const mockUserDB = [];
+
+// Use Real DB store instead of mockDB
+const mockUserDB = async () => await getUserFromDB();
 
 /**
  * Retreive user from the Mock DB:
  * @param {User} input - {username: 'myname', password: 'mypass'}
  * @returns {User | undefined}
  */
-exports.retrieveUserFromMockDB = (input) => {
-  const matches = mockUserDB.filter(
+exports.retrieveUserFromMockDB = async (input) => {
+  const matches = await mockUserDB.filter(
     (user) => user.username === input.username && user.password === input.password
   );
 
