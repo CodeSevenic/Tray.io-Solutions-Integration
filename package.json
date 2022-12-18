@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "firebase": "^9.15.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "lodash": "^4.17.13",
@@ -39,10 +40,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.5",
-    "@babel/core": "^7.14.5",
-    "@babel/node": "^7.14.5",
-    "@babel/preset-env": "^7.14.5",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "nodemon": "^1.19.4",
