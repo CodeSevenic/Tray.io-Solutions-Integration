@@ -62,19 +62,24 @@ exports.addUserToBD = async (user) => {
   }
 };
 
+// get users from DB
 exports.getUserFromDB = async () => {
   const querySnapshot = await getDocs(collection(db, 'users'));
   let users = [];
   querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.get('user.body.name')}`);
+    // console.log(`${doc.id} => ${doc.get('user.body.name')}`);
     const user = {
       name: doc.get('user.body.name'),
-      uuid: input.uuid,
-      trayId: input.trayId,
+      uuid: doc.get('user.uuid'),
+      trayId: doc.get('user.trayId'),
       username: doc.get('user.body.username'),
       password: doc.get('user.body.password'),
     };
+
+    users.push(user);
   });
+
+  console.log(users);
 };
 
 // Fetch Refresh Token if exist in FireStore
