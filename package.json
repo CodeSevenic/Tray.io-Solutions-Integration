@@ -35,7 +35,7 @@
     "start-client": "react-scripts start",
     "api": "BABEL_DISABLE_CACHE=1 nodemon --exec babel-node -r dotenv/config server/server.js --presets @babel/preset-env",
     "server": "nodemon server/server.js",
-    "build": "cross-env react-scripts build && mv build server/frontend",
+    "build": "cross-env react-scripts build && mv build server",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

@@ -7,10 +7,10 @@ const cors = require('cors');
 // let bodyParser = require('body-parser');
 
 // Front End
-app.use(express.static(path.join(__dirname, './frontend/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('*', function (_, res) {
-  res.sendFile(path.join(__dirname, './frontend/build/index.html'), function (err) {
+app.get('/', function (_, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'), function (err) {
     if (err) {
       res.status(500).send(err);
     }

@@ -12,6 +12,7 @@ export default class Login extends React.Component {
   };
 
   login = (data) => {
+    console.log(data);
     console.log('Logging in ' + data.username);
     this.setState({
       loading: true,
