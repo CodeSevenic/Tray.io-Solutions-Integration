@@ -8,8 +8,9 @@ import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
+import rootReducer from './reducers/rootReducer';
 
-const store = createStore();
+const store = createStore(rootReducer);
 
 const theme = createMuiTheme({
   palette: {
