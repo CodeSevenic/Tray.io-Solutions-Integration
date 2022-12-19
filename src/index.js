@@ -7,10 +7,6 @@ import App from './Router';
 import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { legacy_createStore as createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from './reducers/rootReducer';
-
-const store = createStore(rootReducer);
 
 const theme = createMuiTheme({
   palette: {
@@ -20,15 +16,13 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <Provider store={store}>
-    <div className="index-wrapper">
-      <BrowserRouter>
-        <MuiThemeProvider theme={theme}>
-          <App />
-        </MuiThemeProvider>
-      </BrowserRouter>
-    </div>
-  </Provider>,
+  <div className="index-wrapper">
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </div>,
   document.getElementById('root')
 );
 
