@@ -6,6 +6,7 @@ export const auth = {
   isAuthenticated: false,
 
   authenticate(cb) {
+    console.log(cb);
     this.isAuthenticated = true;
     if (typeof cb === 'function') {
       cb(true);
