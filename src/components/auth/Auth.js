@@ -1,13 +1,13 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-
 export const auth = {
-  isAuthenticated: false,
+  isAuthenticated: sessionStorage.getItem('userLogged') || false,
 
   authenticate(cb) {
     console.log(cb);
     this.isAuthenticated = true;
+    sessionStorage.setItem('userLogged', true);
+
     if (typeof cb === 'function') {
       cb(true);
     }

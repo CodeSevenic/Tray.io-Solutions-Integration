@@ -6,7 +6,6 @@ import App from './Router';
 // import registerServiceWorker from './registerServiceWorker';
 import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import { legacy_createStore as createStore } from 'redux';
 
 const theme = createMuiTheme({
   palette: {
